@@ -14,8 +14,14 @@ def guess_letter(secret_word, displayed_word, numlives):
     guess = input("Guess a letter: ").strip()
     
     # Make sure guess is valid and hasn't been guessed already
-    while len(guess) != 1 or not guess.isalpha() or guess in guessed_letters:
-        guess = input("guess is invalid or has been guessed already - please try again: ")
+    while True:
+        if len(guess) != 1 or not guess.isalpha():
+            guess = input("Guess is invalid - please try again: ")
+            continue
+        if guess in guessed_letters:
+            guess = input("You already guessed this letter - please try again: ")
+            continue
+        break
     guessed_letters.append(guess)
     guess = guess.lower()
     # If guess is correct, reveal where the letter is in the word
